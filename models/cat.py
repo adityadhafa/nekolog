@@ -43,3 +43,29 @@ class Cat:
         
         conn.commit()  
         conn.close()
+        
+    @staticmethod
+    def get_all():
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        the_query = "SELECT * FROM cats"
+        cursor.execute(the_query)
+        
+        results = cursor.fetchall()
+        
+        cats =[]
+        
+        for row in results:
+            cat_id = row[0]
+            name = row[1]
+            breed = row[2]
+            weight_kg = row[3]
+
+            new_cat = Cat(name, breed, weight_kg, id=cat_id)
+            
+            cats.append(new_cat)
+        
+        conn.close()
+        
+        return cats
