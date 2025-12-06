@@ -65,7 +65,44 @@ class Cat:
             new_cat = Cat(name, breed, weight_kg, id=cat_id)
             
             cats.append(new_cat)
-        
+            
         conn.close()
         
         return cats
+
+    def delete(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        del_query = """
+        DELETE FROM cats WHERE id = ?
+        """
+        
+        cursor.execute(del_query, (self.id, ))
+        
+        self.id = None # cause it's been deleted
+
+        conn.commit()
+        conn.close()
+        
+    def update(self, name:str, breed:str, weight_kg:float):
+        conn = get_connection()
+        
+        cursor = conn.cursor()
+        
+        update_query = """
+        UPDATE cats
+        SET name = ?, breed = ?, weight_kg = ?
+        WHERE id = ?
+        """
+        
+        data = (name, breed, weight_kg, self.id) 
+        
+        cursor.execute(update_query, data)
+        
+        conn.commit()
+        conn.close()
+        
+        self.name = name
+        self.breed = breed
+        self.weight_kg = weight_kg
