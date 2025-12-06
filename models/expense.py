@@ -48,3 +48,35 @@ class Expense:
         
         conn.commit()
         conn.close()
+        
+    @staticmethod
+    def get_by_cat_id(cat_id: int):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        query = """
+        SELECT * FROM expenses WHERE cat_id = ?
+        """
+        
+        cursor.execute(query, (cat_id,))
+        
+        result = cursor.fetchall()
+        
+        expenses = []
+        
+        for row in result:
+            #from sql database, change it all into object
+            new_expense = Expense(
+                amount=row[1],
+                category=row[2],
+                date=row[3],
+                description=row[4],
+                cat_id=row[5],
+                id=row[0]
+            )
+            
+            expenses.append(new_expense)
+            
+        conn.close()
+        
+        return expenses
