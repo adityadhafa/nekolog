@@ -1,6 +1,6 @@
 from database.db import get_connection
 
-class Expenses:
+class Expense:
     def __init__(self, amount: int, category: str, date: str, description: str, cat_id: int, id=None):
         self.id = id
         self.amount = amount
@@ -31,3 +31,20 @@ class Expenses:
         conn.commit()
         conn.close()
     
+    def save(self):
+        #inserting
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        save_query = """
+        INSERT INTO expenses (amount, category, date, description, cat_id) VALUES (?, ?, ?, ?, ?)
+        """
+        
+        data = (self.amount, self.category, self.date, self.description, self.cat_id)
+        cursor.execute(save_query, data)
+        
+        # updating id 
+        self.id = cursor.lastrowid
+        
+        conn.commit()
+        conn.close()
