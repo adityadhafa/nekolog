@@ -80,3 +80,23 @@ class Expense:
         conn.close()
         
         return expenses
+    
+    @staticmethod
+    def get_total_by_cat_id(cat_id: int):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        query = """
+        SELECT SUM(amount) FROM expenses WHERE cat_id = ?
+        """
+        
+        cursor.execute(query, (cat_id,))
+        
+        result = cursor.fetchone()
+        
+        conn.close()
+        
+        if result[0]:
+            return result[0]
+        else:
+            return 0
