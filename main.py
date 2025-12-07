@@ -7,13 +7,19 @@ from rich.table import Table
 def main():
     want = ""
     while(want != "0"):
-        print("=== 🐱 NEKOLOG 🐱 ===")
-        print("1. Add a Cat")
-        print("2. Print All Cats")
-        print("3. Catat Pengeluaran")
-        print("4. Liat Leaderboard Sultan")
-        print("0. Keluar")
-        want = input("Select menu: ")
+        table = Table(title="=== 🐱 NEKOLOG 🐱 ===")
+        table.add_column("No.",)
+        table.add_column("Menu",)
+        
+        table.add_row("1.", "Add a Cat")
+        table.add_row("2.", "Print All Cats")
+        table.add_row("3.", "Catat Pengeluaran")
+        table.add_row("4.", "Liat Leaderboard Sultan")
+        table.add_row("0.", "Keluar")
+        
+        console = Console()
+        console.print(table)
+        want = input("Select menu (No.): ")
         
         if(want == "2"):
             res = Cat.get_all()
@@ -47,7 +53,7 @@ def main():
                 continue
             
             category = input("input category: ")
-            date =  input("input date (YY-MM-DD): ")
+            date =  input("input date (YYYY-MM-DD): ")
             description = input("desc: ")
             
             new_expenses = Expense(amount=amount, category=category, date=date, description=description, cat_id=cat_id)
