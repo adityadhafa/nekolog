@@ -100,3 +100,24 @@ class Expense:
             return result[0]
         else:
             return 0
+        
+    @staticmethod
+    def get_leaderboard():
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        leaderboard_query = """
+        SELECT c.name, SUM(e.amount) AS total_expenses
+        FROM expenses AS e
+        INNER JOIN cats AS c
+        ON e.cat_id = c.id
+        GROUP BY c.name
+        ORDER BY total_expenses DESC
+        """
+        
+        cursor.execute(leaderboard_query)
+        result = cursor.fetchall()
+        
+        conn.close()
+        
+        return result
