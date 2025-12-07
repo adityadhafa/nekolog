@@ -13,9 +13,9 @@ def main():
         
         table.add_row("1.", "Add a Cat")
         table.add_row("2.", "Print All Cats")
-        table.add_row("3.", "Catat Pengeluaran")
-        table.add_row("4.", "Liat Leaderboard Sultan")
-        table.add_row("0.", "Keluar")
+        table.add_row("3.", "Add Expenses")
+        table.add_row("4.", "Expenses Leaderboard")
+        table.add_row("0.", "Exit")
         
         console = Console()
         console.print(table)
@@ -64,6 +64,18 @@ def main():
             
         elif(want == "4"):
             res = Expense.get_leaderboard()
+            
+            table = Table(title="🏆 EXPENSES LEADERBOARD 🏆")
+            
+            table.add_column("No.", style="cyan")
+            table.add_column("Name", style="magenta")
+            table.add_column("Total Expenses", style="magenta")
+            
+            for i, cat in enumerate(res, start=1):
+                table.add_row(f"{i}", f"{cat[0]}", f"{cat[1]}")
+            
+            console = Console()
+            console.print(table)
             
         elif(want == "1"):
             name = input("name: ")
