@@ -8,13 +8,14 @@ def main():
     want = ""
     while(want != "0"):
         print("=== 🐱 NEKOLOG 🐱 ===")
-        print("1. Print All Cats")
-        print("2. Catat Pengeluaran")
-        print("3. Liat Leaderboard Sultan")
+        print("1. Add a Cat")
+        print("2. Print All Cats")
+        print("3. Catat Pengeluaran")
+        print("4. Liat Leaderboard Sultan")
         print("0. Keluar")
         want = input("Select menu: ")
         
-        if(want == "1"):
+        if(want == "2"):
             res = Cat.get_all()
             
             table = Table(title="All Cats")
@@ -31,7 +32,7 @@ def main():
             console = Console()
             console.print(table)
             
-        elif(want == "2"):
+        elif(want == "3"):
             amount = int(input("amount: "))
             
             name = input("name: ")
@@ -55,8 +56,18 @@ def main():
             
             print("expenses saved!")
             
-        elif(want == "3"):
+        elif(want == "4"):
             res = Expense.get_leaderboard()
+            
+        elif(want == "1"):
+            name = input("name: ")
+            breed = input("breed: ")
+            weight = float(input("weight: "))
+            
+            new_cat = Cat(name=name, breed=breed, weight_kg=weight)
+            new_cat.save()
+            
+            print("cat saved!")
     
 if __name__ == "__main__":
     main()
