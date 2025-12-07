@@ -106,3 +106,22 @@ class Cat:
         self.name = name
         self.breed = breed
         self.weight_kg = weight_kg
+        
+    @staticmethod
+    def search_cat(name: str):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        query = """
+        SELECT id, name FROM cats WHERE name LIKE ?
+        """
+        
+        data = (f"%{name}%")
+        
+        cursor.execute(query, (data, ))
+        
+        res = cursor.fetchall()
+        
+        conn.close()
+        
+        return res
