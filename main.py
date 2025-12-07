@@ -1,6 +1,9 @@
 from models.cat import Cat
 from models.expense import Expense
 
+from rich.console import Console
+from rich.table import Table
+
 def main():
     want = ""
     while(want != "0"):
@@ -13,6 +16,21 @@ def main():
         
         if(want == "1"):
             res = Cat.get_all()
+            
+            table = Table(title="All Cats")
+            
+            table.add_column("No.", style="cyan")
+            table.add_column("Id", style="cyan")
+            table.add_column("Name", style="magenta")
+            table.add_column("Breed", style="magenta")
+            table.add_column("Weight (Kg)", style="magenta")
+            
+            for i, cat in enumerate(res, start=1):
+                table.add_row(f"{i}", f"{cat.id}", f"{cat.name}", f"{cat.breed}", f"{cat.weight_kg}")
+            
+            console = Console()
+            console.print(table)
+            
         elif(want == "2"):
             amount = int(input("amount: "))
             
