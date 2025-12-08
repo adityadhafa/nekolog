@@ -7,6 +7,48 @@ from models.expense import Expense
 
 console = Console()
 
+def display_leaderboard(data):
+    console.rule("[bold gold1]🏆 LEADERBOARD 🏆[/]")
+    
+    table = Table(box=None) 
+
+    table.add_column("Rank", justify="center", style="cyan")
+    table.add_column("Name", style="bold magenta")
+    table.add_column("Total Burned (Rp)", justify="right", style="green")
+    
+    for num, row in enumerate(data, start=1):
+        name = row[0]
+        amount = row[1]
+
+        if num == 1:
+            rank_str = "🥇 1"
+            name_style = "[bold gold1]"
+            amount_style = "[bold gold1]"
+        elif num == 2:
+            rank_str = "🥈 2"
+            name_style = "[bold white]" 
+            amount_style = "[bold white]"
+        elif num == 3:
+            rank_str = "🥉 3"
+            name_style = "[bold orange1]"
+            amount_style = "[bold orange1]"
+        else:
+            rank_str = str(num)
+            name_style = ""
+            amount_style = ""
+            
+        formatted_money = f"Rp {amount:,}"
+
+        table.add_row(
+            rank_str, 
+            f"{name_style}{name}[/]", 
+            f"{amount_style}{formatted_money}[/]"
+        )
+    
+    console.print(table)
+
+    input("\nPress [Enter] to continue...")
+
 def add_expense_display():
     console.rule("[bold green]💸 RECORD NEW EXPENSE[/]")
 
