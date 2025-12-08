@@ -132,3 +132,51 @@ def update_cat_data_display():
         input("Press Enter to return...")
     else:
         console.print("[yellow]❌ Cancelled.[/]")
+        
+def delete_cat_display():
+    console.rule("[bold red]🗑️  DELETE CAT[/]")
+
+    search_name = questionary.text("🔍 Search Cat Name to Delete:").ask()
+    if not search_name: return 
+
+    results = Cat.search_cat(search_name)
+    
+    if not results:
+        console.print("[bold red]❌ No cat found![/] Try other name.", style="red")
+        input("Press Enter to return...")
+        return
+
+    cat_choices = []
+    for row in results:
+        cat_choices.append(Choice(title=f"🐱 {row[1]} (ID: {row[0]})", value=row[0]))
+    
+    cat_choices.append(Choice(title="❌ Cancel", value="cancel"))
+
+    selected_cat_id = questionary.select(
+        "Select the cat to DELETE:",
+        choices=cat_choices
+    ).ask()
+    
+    if selected_cat_id == "cancel": return
+
+    target_cat = Cat.get_by_id(selected_cat_id)
+    
+    if not target_cat:
+        console.print("[red]Error: Data kucing tidak ditemukan.[/]")
+        return
+
+    console.print(f"\n[bold white on red] ⚠️  WARNING! ⚠️ [/]")
+    console.print(f"You are about to delete [bold cyan]{target_cat.name}[/] permanently.")
+    console.print("This action cannot be undone.\n")
+    
+    confirm = questionary.confirm(
+        f"Are you 100% sure you want to delete {target_cat.name}?",
+        default=False 
+    ).ask()
+    
+    if confirm:
+        target_cat.delete()
+        console.print(f"\n[bold green]✅ DELETED![/] Data [strike]{target_cat.name}[/] telah dihapus dari muka bumi NekoLog. 👋")
+        input("Press Enter to return...")
+    else:
+        console.print("[yellow]❌ Cancelled. The cat is safe![/]")
