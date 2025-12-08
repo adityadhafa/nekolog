@@ -125,3 +125,20 @@ class Cat:
         conn.close()
         
         return res
+
+    @classmethod
+    def get_by_id(cls, cat_id):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        # Ambil semua kolom (id, name, breed, weight)
+        query = "SELECT * FROM cats WHERE id = ?"
+        cursor.execute(query, (cat_id,))
+        row = cursor.fetchone()
+        
+        conn.close()
+        
+        if row:
+            # Balikin sebagai Objek Cat biar enak dipake
+            return cls(name=row[1], breed=row[2], weight_kg=row[3], id=row[0])
+        return None

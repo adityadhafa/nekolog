@@ -1,4 +1,5 @@
 import questionary
+from questionary import Choice
 from rich.table import Table
 from rich.console import Console
 from models.cat import Cat 
@@ -63,3 +64,71 @@ def add_new_cat_display():
 def display_cat_form_success(cat_name: str):
     console.print(f"\n[bold green]✅ SUCCESS![/] Kucing [cyan]{cat_name}[/] berhasil didaftarkan! 😺🎉")
     input("Tekan [Enter] untuk lanjut...")
+
+
+def update_cat_data_display():
+    console.rule("[bold orange1]✏️ UPDATE CAT DATA[/]")
+    
+    search_name = questionary.text("🔍 Search Cat Name:").ask()
+    if not search_name: return 
+
+    results = Cat.search_cat(search_name)
+    
+    if not results:
+        console.print("[bold red]❌ No cat found![/] Try other name.", style="red")
+        input("Press Enter to return...")
+        return
+
+    cat_choices = []
+    for row in results:
+        cat_choices.append(Choice(title=f"🐱 {row[1]} (ID: {row[0]})", value=row[0]))
+    
+    cat_choices.append(Choice(title="❌ Cancel", value="cancel"))
+
+    selected_cat_id = questionary.select(
+        "Select the cat to edit:",
+        choices=cat_choices
+    ).ask()
+    
+    if selected_cat_id == "cancel": return
+    
+    current_cat = Cat.get_by_id(selected_cat_id)
+    
+    if not current_cat:
+        console.print("[red]Error: Data kucing tidak ditemukan di DB.[/]")
+        return
+
+    console.print(f"\n[dim]Editing data for: [bold cyan]{current_cat.name}[/][/dim]")
+    console.print("[dim] Press [Enter] jika tidak ingin mengubah data.[/dim]\n")
+
+    new_name = questionary.text("🐱 Name:", default=current_cat.name).ask()
+    new_breed = questionary.text("🧬 Breed:", default=current_cat.breed).ask()
+    
+    while True:
+        try:
+            weight_input = questionary.text("⚖️  Weight (Kg):", default=str(current_cat.weight_kg)).ask()
+            new_weight = float(weight_input)
+            break
+        except ValueError:
+            console.print("[bold red]❌ Error:[/] Weight must be a number!")
+
+    table = Table(title="📝 UPDATE PREVIEW")
+    table.add_column("Field", style="cyan")
+    table.add_column("Old Value", style="dim")
+    table.add_column("New Value", style="bold green")
+    
+    table.add_row("Name", current_cat.name, new_name)
+    table.add_row("Breed", current_cat.breed, new_breed)
+    table.add_row("Weight", f"{current_cat.weight_kg} kg", f"{new_weight} kg")
+    
+    console.print(table)
+    
+    confirm = questionary.confirm("Save changes?").ask()
+    
+    if confirm:
+        current_cat.update(name=new_name, breed=new_breed, weight_kg=new_weight)
+        
+        console.print(f"\n[bold green]✅ UPDATED![/] Data {new_name} berhasil diperbarui! 😺")
+        input("Press Enter to return...")
+    else:
+        console.print("[yellow]❌ Cancelled.[/]")
