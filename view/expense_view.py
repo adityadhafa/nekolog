@@ -59,13 +59,13 @@ def add_expense_display():
     results = Cat.search_cat(search_name)
     
     if not results:
-        console.print("[bold red]❌ No cat found![/] Coba nama lain.", style="red")
+        console.print("[bold red]❌ No cat found![/] Try other name.", style="red")
         input("Press Enter to return...")
         return
 
     cat_choices = []
-    for row in results:
-        cat_choices.append(Choice(title=f"🐱 {row[1]} (ID: {row[0]})", value=row[0]))
+    for cat in results:
+        cat_choices.append(Choice(title=f"🐱 {cat.name} (ID: {cat.id})", value=cat.id))
     
     cat_choices.append(Choice(title="❌ Cancel", value="cancel"))
 

@@ -111,20 +111,21 @@ class Cat:
     def search_cat(name: str):
         conn = get_connection()
         cursor = conn.cursor()
+
+        query = "SELECT * FROM cats WHERE name LIKE ?"
         
-        query = """
-        SELECT id, name FROM cats WHERE name LIKE ?
-        """
+        data = (f"%{name}%", ) 
+        cursor.execute(query, data)
         
-        data = (f"%{name}%")
-        
-        cursor.execute(query, (data, ))
-        
-        res = cursor.fetchall()
-        
+        results = cursor.fetchall()
         conn.close()
-        
-        return res
+
+        cats = []
+        for row in results:
+            found_cat = Cat(name=row[1], breed=row[2], weight_kg=row[3], id=row[0])
+            cats.append(found_cat)
+            
+        return cats
 
     @classmethod
     def get_by_id(cls, cat_id):

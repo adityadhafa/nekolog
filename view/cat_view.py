@@ -80,8 +80,8 @@ def update_cat_data_display():
         return
 
     cat_choices = []
-    for row in results:
-        cat_choices.append(Choice(title=f"🐱 {row[1]} (ID: {row[0]})", value=row[0]))
+    for cat in results:
+        cat_choices.append(Choice(title=f"🐱 {cat.name} (ID: {cat.id})", value=cat.id))
     
     cat_choices.append(Choice(title="❌ Cancel", value="cancel"))
 
@@ -147,8 +147,8 @@ def delete_cat_display():
         return
 
     cat_choices = []
-    for row in results:
-        cat_choices.append(Choice(title=f"🐱 {row[1]} (ID: {row[0]})", value=row[0]))
+    for cat in results:
+        cat_choices.append(Choice(title=f"🐱 {cat.name} (ID: {cat.id})", value=cat.id))
     
     cat_choices.append(Choice(title="❌ Cancel", value="cancel"))
 
@@ -180,3 +180,20 @@ def delete_cat_display():
         input("Press Enter to return...")
     else:
         console.print("[yellow]❌ Cancelled. The cat is safe![/]")
+
+def search_cat_display():
+    console.rule("[bold cyan]🔍 SEARCH CAT[/]")
+
+    keyword = questionary.text("Enter cat name to search:").ask()
+    if not keyword: return # Return if empty
+    
+    results = Cat.search_cat(keyword)
+
+    if results:
+        console.print(f"\n[italic green]Found {len(results)} cats matching '{keyword}':[/]")
+
+        display_all_cats(results) 
+        
+    else:
+        console.print(f"\n[bold red]❌ NO RESULTS![/] No cats found matching [bold white]'{keyword}'[/].")
+        input("Press [Enter] to return...")
