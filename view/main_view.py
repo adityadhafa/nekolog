@@ -1,43 +1,63 @@
-from rich.table import Table
+import questionary
+from questionary import Choice
 from rich.console import Console
+from rich.table import Table
 
 console = Console()
 
 def display_main_menu():
-    table = Table(title="=== 🐱 NEKOLOG 🐱 ===")
-    table.add_column("No.", style="cyan")
-    table.add_column("Menu", style="bold white")
+    # 1. DISPLAY TABLE (Header/Info)
+    table = Table(title="=== 🐱 NEKOLOG DASHBOARD 🐱 ===")
+    table.add_column("Module", style="bold cyan", justify="center")
+    table.add_column("Description", style="magenta")
     
-    table.add_row("1", "About Cat (Menu Kucing)")
-    table.add_row("2", "About Expenses (Menu Keuangan)")
-    table.add_row("0", "Exit")
+    table.add_row("🐱 Cats", "Manage Cat Profiles")
+    table.add_row("💰 Finances", "Track Expenses & Leaderboard")
+    table.add_row("❌ Exit", "Close Application")
     
-    console.print(table)
-    return input("Select menu (No.): ")
+    console.print(table) 
+    print("") 
+    
+    # 2. DISPLAY MENU SELECTION (Input)
+    answer = questionary.select(
+        "Where would you like to go?",
+        choices=[
+            Choice(title="1. Cats Menu (Manage Profiles)", value="1"),
+            Choice(title="2. Finance Menu (Manage Expenses)", value="2"),
+            Choice(title="0. Exit", value="0"),
+        ]
+    ).ask()
+    
+    return answer
 
 def display_cat_submenu():
-    table = Table(title="=== CATS MENU ===")
-    table.add_column("No.", style="cyan")
-    table.add_column("Menu", style="magenta")
+    # Submenu Header
+    console.rule("[bold cyan]🐱 CAT MANAGEMENT[/]") 
     
-    table.add_row("1.", "Add a Cat")
-    table.add_row("2.", "Show All Cats")
-    table.add_row("3.", "Search Cat")       
-    table.add_row("4.", "Update Cat Data")
-    table.add_row("5.", "Delete a Cat")
-    table.add_row("0.", "Back")
+    answer = questionary.select(
+        "Select Operation:",
+        choices=[
+            Choice(title="➕ Add New Cat", value="1"),
+            Choice(title="👀 View All Cats", value="2"),
+            Choice(title="🔍 Search Cat", value="3"),
+            Choice(title="✏️  Update Cat Data", value="4"),
+            Choice(title="🗑️  Delete Cat", value="5"),
+            Choice(title="🔙 Back to Main Menu", value="0"),
+        ]
+    ).ask()
     
-    console.print(table)           
-    return input("Select (No.): ") 
+    return answer
 
 def display_expense_submenu():
-    table = Table(title="=== EXPENSE MENU ===") 
-    table.add_column("No.", style="cyan")
-    table.add_column("Menu", style="green")
+    console.rule("[bold green]💰 FINANCE MANAGEMENT[/]")
     
-    table.add_row("1.", "Add Expense")          
-    table.add_row("2.", "Leaderboard Sultan")
-    table.add_row("0.", "Back")
+    answer = questionary.select(
+        "Select Operation:",
+        choices=[
+            Choice(title="💸 Record New Expense", value="1"),
+            Choice(title="🏆 View Expenses Leaderboard", value="2"),
+            Choice(title="🔙 Back to Main Menu", value="0"),
+        ]
+    ).ask()
     
-    console.print(table)           
-    return input("Select (No.): ") 
+    return answer
