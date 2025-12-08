@@ -21,7 +21,7 @@ class Expense:
             category TEXT NOT NULL,
             date TEXT NOT NULL,
             description TEXT NOT NULL,
-            cat_id INTEGER NOT NULL,
+            cat_id INTEGER NULLABLE,
             FOREIGN KEY (cat_id) REFERENCES cats(id)
         )
         """
@@ -120,4 +120,5 @@ class Expense:
         
         conn.close()
         
+        # returning tuple
         return result

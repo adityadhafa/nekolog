@@ -40,8 +40,8 @@ def display_cat_submenu():
             Choice(title="➕ Add New Cat", value="1"),
             Choice(title="👀 View All Cats", value="2"),
             Choice(title="🔍 Search Cat", value="3"),
-            Choice(title="✏️  Update Cat Data", value="4"),
-            Choice(title="🗑️  Delete Cat", value="5"),
+            Choice(title="✏️ Edit Cat Data", value="4"),
+            Choice(title="🗑️ Delete Cat", value="5"),
             Choice(title="🔙 Back to Main Menu", value="0"),
         ]
     ).ask()
