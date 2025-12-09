@@ -355,7 +355,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Support
 
--   📧 Email: aditdhafa@example.com
+-   📧 Email: aditdhafa@gmail.com
 -   🐛 Issues: https://github.com/adityadhafa/nekolog/issues
 -   🌟 Star this repo if you find it helpful!
 
