@@ -363,7 +363,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
 
-**Built with ❤️ and ☕ by [Your Name]**
+**Built with ❤️ and ☕ by Aditya Dhafa Priputra**
 
 [![GitHub followers](https://img.shields.io/github/followers/adityadhafa?style=social)](https://github.com/adityadhafa) 
 
