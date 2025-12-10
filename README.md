@@ -10,33 +10,30 @@
 **A production-ready CLI application for tracking pet expenses with enterprise-grade architecture**
 
 <p align="center">
-  <a href="#-overview">Overview</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-architecture">Architecture</a> •
-  <a href="#-installation--usage">Install</a> •
-  <a href="#-project-structure">Structure</a>
+  <a href="#overview">Overview</a> •
+  <a href="#features">Features</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#install">Install</a> •
+  <a href="#structure">Structure</a>
 </p>
-</div>
 
 ----------
 
 ## 📋 Table of Contents
 
--   [Overview](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-overview)
--   [Features](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-features)
--   [Architecture](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-architecture)
--   [Tech Stack](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-tech-stack)
--   [Installation](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-installation)
--   [Usage](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-usage)
--   [Project Structure](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-project-structure)
--   [API Reference](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-api-reference)
--   [Roadmap](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-roadmap)
--   [Contributing](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-contributing)
--   [License](https://claude.ai/chat/b69b0662-ef0e-4c0e-ab55-0c522f9b46ca#-license)
+-   [Overview](#overview)
+-   [Features](#features)
+-   [Architecture](#architecture)
+-   [Tech Stack](#tech)
+-   [Installation](#install)
+-   [Usage](#usage)
+-   [Project Structure](#structure)
+-   [Contributing](#contributing)
+-   [License](#license)
 
 ----------
 
-## 🎯 Overview
+## <a id="overview"></a>🎯 Overview
 
 **NekoLog** is a sophisticated terminal-based financial management system engineered for pet owners who demand professional-grade expense tracking. Built on **SOLID principles** and **Clean Architecture**, it transforms simple record-keeping into a powerful analytics platform.
 
@@ -60,7 +57,7 @@
 
 ----------
 
-## ✨ Features
+## <a id="features"></a>✨ Features
 
 ### Core Functionality
 
@@ -95,7 +92,7 @@
 
 ----------
 
-## 🏗️ Architecture
+## <a id="architecture"></a>🏗️ Architecture
 
 NekoLog follows the **Model-View-Controller (MVC)** pattern with a clear separation of concerns:
 
@@ -130,7 +127,7 @@ NekoLog follows the **Model-View-Controller (MVC)** pattern with a clear separat
 
 ----------
 
-## 🛠️ Tech Stack
+## <a id="tech"></a>🛠️ Tech Stack
 
 ### Core Technologies
 | Technology | Version | Purpose |
@@ -149,7 +146,7 @@ NekoLog follows the **Model-View-Controller (MVC)** pattern with a clear separat
 
 ----------
 
-## 📦 Installation
+## <a id="install"></a>📦 Installation
 
 ### Prerequisites
 -   Python 3.8 or higher
@@ -204,7 +201,7 @@ python main.py
 
 ----------
 
-## 🚀 Usage
+## <a id="usage"></a>🚀 Usage
 
 ### Basic Workflow
 
@@ -253,7 +250,7 @@ Main Menu > Show Leaderboard
 
 ----------
 
-## 📂 Project Structure
+## <a id="structure"></a>📂 Project Structure
 
 ```
 nekolog/
@@ -289,7 +286,7 @@ nekolog/
 ----------
 
 
-## 🤝 Contributing
+## <a id="contributing"></a>🤝 Contributing
 
 We love contributions! Here's how you can help:
 
@@ -335,7 +332,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 -   Write descriptive variable names
 
 ----------
-## 📄 License
+## <a id="license"></a>📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
