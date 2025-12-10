@@ -17,7 +17,7 @@
   <a href="#structure">Structure</a>
 </p>
 
-----------
+</div> ----------
 
 ## 📋 Table of Contents
 
